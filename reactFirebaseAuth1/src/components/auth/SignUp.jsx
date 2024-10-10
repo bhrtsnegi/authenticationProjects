@@ -1,18 +1,16 @@
 import { useState } from 'react'
 import { auth } from '../../firebase'
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
-const SignIn = () => {
+const SignUp = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleSignIn = (e) =>{
+    const handleSignUp = (e) =>{
         e.preventDefault();
-        signInWithEmailAndPassword(auth, email, password)
+        createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             console.log(userCredential);
-            setEmail('');
-            setPassword('');
         }).catch((error) =>{
             console.log(error);
         })
@@ -20,8 +18,8 @@ const SignIn = () => {
     }
   return (
     <div className='text-center'>
-        <form onSubmit={handleSignIn}>
-            <h1 className='text-2xl font-bold mt-4'>Login to your account</h1>
+        <form onSubmit={handleSignUp}>
+            <h1 className='text-2xl font-bold mt-4'>Create Your Account</h1>
             <input 
                 type="email" 
                 placeholder='Enter Your Email' 
@@ -37,7 +35,9 @@ const SignIn = () => {
                 className='border rounded-lg border-gray-500 m-3 p-1'
             />
             <div>
-                <button type='submit' className='font-bold bg-green-600 border rounded-lg border-gray-400 p-1'>Submit</button>
+                <button type='submit' className='font-bold bg-blue-400 border rounded-lg border-gray-400 p-1'>
+                    SignUp
+                </button>
             </div>
             
         </form>
@@ -45,4 +45,4 @@ const SignIn = () => {
   )
 }
 
-export default SignIn
+export default SignUp
